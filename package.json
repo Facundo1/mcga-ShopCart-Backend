@@ -1,0 +1,26 @@
+{
+  "name": "back",
+  "version": "1.0.0",
+  "description": "shopping-Cart",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Facundo1/mcga-Back.git"
+  },
+  "author": "Facundo Loberse, Juliano Acunia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Facundo1/mcga-Back/issues"
+  },
+  "homepage": "https://github.com/Facundo1/mcga-Back#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "jwt-simple": "^0.5.6",
+    "mongoose": "^5.8.9"
+  }
+}
