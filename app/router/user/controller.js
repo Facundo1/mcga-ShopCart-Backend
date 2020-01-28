@@ -3,7 +3,7 @@ const sha256 = require('sha256')
 const jwt = require('jsonwebtoken')
 const functions = require('../../functions')
 
-const geAll = (req, res) => {
+const getAll = (req, res) => {
     User.find({},{password: 0, __v: 0}, (err,users) => {
         if (err) res.send({msg: 'can`t get the user list', error: err})
         res.send(users)
