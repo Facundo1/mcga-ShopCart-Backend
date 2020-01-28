@@ -10,8 +10,6 @@ const  {
   upsert,
   update,
   remove,
-  signIn,
-  signUp
 } = controller
 
 router.use(express.json())
