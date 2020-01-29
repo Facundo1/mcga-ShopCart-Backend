@@ -4,7 +4,7 @@ const config = require('../../dbconfig/connectionstring.config')
 
 function createToken(user){
     const payload = 
-    {uid: user._id, ct: moment().unix(), wt: moment().add(2, 'hours').unix()}
+    {uid: user.id, ct: moment().unix(), wt: moment().add(2, 'hours').unix()}
     return jwtSimple.encode(payload, config.token_key)
 }
 

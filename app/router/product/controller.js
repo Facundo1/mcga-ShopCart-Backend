@@ -1,5 +1,5 @@
 const Product = require('../../models/products')
-const validateProductInput = require("../../validations/products")
+
 
 const getAll = (req , res ) => {
   res.send({Product});
