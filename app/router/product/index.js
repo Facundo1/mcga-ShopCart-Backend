@@ -6,17 +6,19 @@ const router = express.Router()
 const  {
   getAll,
   getById,
-  post,
-  put,
+  insert,
+  upsert,
+  update,
   remove
 } = controller
 
 router.use(express.json())
 
-router.get('/', getAll)
-router.get('/:id', getById)
-router.post('/', post)
-router.post('/:id', put)
-router.delete('/:id', remove)
+router.get('/', getAll);
+router.get('/:id', getById);
+router.post('/', insert);
+router.put('/:id', upsert );
+router.patch('/:id', update);
+router.delete('/:id' , remove);
 
 module.exports = router
