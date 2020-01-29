@@ -3,7 +3,7 @@ const controller = require('./controller')
 const auth = require('../../authentication/auth')
 
 const router = express.Router()
-const  {
+const {
   getAll,
   getById,
   insert,
