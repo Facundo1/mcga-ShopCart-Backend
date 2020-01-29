@@ -1,7 +1,7 @@
 const Product = require('../../models/products')
 const validateProductInput = require("../../validations/products")
 
-router.getAll('/', function(req, res) {
+const getAll =  (req, res) => {
   Product.find({}).then(products => {
       if(products)
         res.status(200).json(products)
@@ -12,10 +12,10 @@ router.getAll('/', function(req, res) {
   .catch(error => {
     res.status(400).json({error:error})
   })
-})
+}
 
-router.get('/:id', function (req, res) {
-  Product.findOne({id: req.params.id}).then( product => {
+const getById =  (req, res) => {
+  Product.findById({id: req.params.id}).then( product => {
     if(product) {
       let products = []
       products.push(product)
@@ -25,9 +25,9 @@ router.get('/:id', function (req, res) {
       res.status(400).json({error:'This product does not exist'})
     }
   })
-})
+}
 
-router.post('/', upload.single('image'), function (req, res) {
+const post = (req, res) => {
   // Form validation
   const { errors, isValid } = validateProductInput(req.body)
   // Check validation
@@ -54,8 +54,7 @@ router.post('/', upload.single('image'), function (req, res) {
             id: newId,
             name: req.body.name,
             price: req.body.price,
-            description: req.body.description,
-            image: req.file.filename  //just save the image path so i can get it later
+            description: req.body.description
           })
           newProduct.save().then(product => res.json(product)).catch(err => console.log(err))
         }
@@ -68,9 +67,9 @@ router.post('/', upload.single('image'), function (req, res) {
         res.status(400).json({error: error})
       })
   }
-})
+}
 
-router.put('/:id', upload.single('image'), function (req, res) {
+ const put = (req, res) => {
   //Form validation
   const { errors, isValid } = validateProductInput(req.body)
   // Check validation
@@ -78,7 +77,7 @@ router.put('/:id', upload.single('image'), function (req, res) {
     res.status(400).json({errors})
   }
   else {
-    Product.findOneAndUpdate({id:req.body.id}, {$set: {name:req.body.name, description:req.body.description, price:req.body.price, image:req.file.filename}}).then(product => {
+    Product.findOneAndUpdate({id:req.body.id}, {$set: {name:req.body.name, description:req.body.description, price:req.body.price}}).then(product => {
       if(product) {
         product.save()
         Product.find({}).then(products => {
@@ -96,9 +95,9 @@ router.put('/:id', upload.single('image'), function (req, res) {
       res.status(400).json({error:error})
     })
    }
-})
+}
 
-router.delete('/:id',function (req, res) {
+const remove = (req, res) => {
   Product.findOneAndDelete({id:req.params.id}).then( product => {
     if(product) {
       res.status(200).json(product)
@@ -111,16 +110,13 @@ router.delete('/:id',function (req, res) {
     res.status(400).json({error:error})
     }
   )
-})
+}
 
 
 module.exports = {
     getAll,
     getById,
-    insert,
-    upsert,
-    update,
-    remove,
-    signIn, 
-    signUp
+    post,
+    put,
+    remove
   }
