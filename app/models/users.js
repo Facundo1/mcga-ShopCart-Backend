@@ -3,24 +3,20 @@ const Schema = mongoose.Schema
 
 const UserSchema = new Schema ({
     id: {
-        type: Number,
-        required: true
+        type: Number
     },
     name: {
-        type: String,
-        required: true
+        type: String
+
     },
     email: {
-        type: String,
-        required: true
+        type: String
     },
     password: {
-        type: String,
-        required: true
+        type: String
     },
     date: {
-        type: Date,
-        required: true
+        type: String
     },
     isAdmin: {
         type: Boolean,
