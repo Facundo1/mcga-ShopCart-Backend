@@ -1,6 +1,6 @@
 const express = require('express')
 const controller = require('./controller')
-const auth = require('../../authentication/auth')
+
 
 const router = express.Router()
 const {
@@ -8,7 +8,6 @@ const {
   getById,
   insert,
   upsert,
-  update,
   remove,
   signIn,
   signUp
@@ -22,7 +21,6 @@ router.post('/', insert)
 router.post('/signIn', signIn)
 router.post('/signUp', signUp)
 router.put('/:id', upsert)
-router.patch('/:id', update)
 router.delete('/:id', remove)
 
 
