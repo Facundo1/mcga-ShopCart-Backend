@@ -2,7 +2,7 @@ const mongoose = require ('mongoose')
 const Schema = mongoose.Schema
 
 const UserSchema = new Schema ({
-    id: {
+    _id: {
         type: Number
     },
     name: {
@@ -22,7 +22,7 @@ const UserSchema = new Schema ({
         type: Boolean,
         default: 0
     }
-})
+}, {versionKey: false})
 
 const User = mongoose.model('users',UserSchema)
 
