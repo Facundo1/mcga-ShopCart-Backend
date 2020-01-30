@@ -57,18 +57,11 @@ const insert = (req, res) => {
   }
   
   const upsert  = (req, res) => {
-    User.updateOne({id: req.params.id}, {...req.body}, (err) => {
+    User.updateOne({_id: req.params.id}, {...req.body}, (err) => {
       if (err) res.send({msg: `Cant't upsert the user ${req.params.id}`, error: err})
       res.send('User upserted')
     })
-  }
-  
-  const update  = (req, res) => {
-    User.updateOne({id: req.params.id}, {[Object.keys(req.body)]: req.body[Object.keys(req.body)]}, (err) => {
-      if (err) res.send({msg: `Cant't update the user ${req.params.id}`, error: err})
-      res.send('User updated')
-    })
-  }
+  }  
   
   const remove = (req, res) => {
     User.deleteOne({_id: req.params.id}, (err) => {
@@ -82,7 +75,6 @@ const insert = (req, res) => {
     getById,
     insert,
     upsert,
-    update,
     remove,
     signIn, 
     signUp
