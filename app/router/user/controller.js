@@ -19,7 +19,7 @@ const getById = (req,res) => {
 
 const insert = (req, res) => { 
     const user = new User({
-      id: req.body.id,
+      _id: req.body.id,
       name: req.body.name,
       email: req.body.email,
       password:  sha256(req.body.password),
@@ -71,7 +71,7 @@ const insert = (req, res) => {
   }
   
   const remove = (req, res) => {
-    User.deleteOne({id: req.params.id}, (err) => {
+    User.deleteOne({_id: req.params.id}, (err) => {
       if (err) res.send({msg: `Cant't delete the user ${req.params.id}`, error: err})
       res.send('User deleted')
     }) 

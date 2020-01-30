@@ -2,60 +2,40 @@ const Product = require('../../models/products')
 
 
 const getAll = (req , res ) => {
-  res.send({Product});
+  Product.find({},(err,products) => {
+    if (err) res.send({msg: 'can`t get the user list', error: err})
+    res.send(products)
+  })
 }
 const getById = (req , res ) => {
-   const product = Product.find(product => product.id == req.params.id);
-   if(product == null){
-       res.send('product doesn´t exist');
-   }
-   else{
-       res.send(product);
-   }
+  Product.findById(req.params.id, (err,products) => {
+    if(err) res.send({msg: `Cant't get the product ${req.params.id}`, error: err})
+    res.send(products)
+})
 }
-
 const insert = (req, res) => {
   const product = new Product({
-    id: req.body.id,
+    _id: req.body.id,
     name: req.body.name,
     description: req.body.description,
     price: req.body.price
   })
-
    product.save((err) => {
-    if (err) res.send({msg: 'Cant`t save the product', error: err});
-    res.send('product saved');
+    if (err) res.send({msg: 'Cant`t save the product', error: err})
+    res.send('product saved')
   })
 }
 const upsert = (req , res ) => {
-   const product = Product.find(product => product.id == req.params.id);
-   if(product == null) {
-       res.send('product doesn`t exist');
-   }
-   else{
-       Product.splice(Product.id-1,1,req.body);
-       res.send(`product: ${Product} upsert`);
-   }
-}
-const update = (req , res ) => {
-   const product = Product.find(product => product.id == req.params.id);
-   if(product == null){
-      res.send('product doesn´t exist');
-   }
-   else{
-       product[Object.keys(req.body)] = req.body[Object.keys(req.body)];
-       res.send(product);
-   }
+  Product.updateOne({_id: req.params.id}, {...req.body}, (err) => {
+    if (err) res.send({msg: `Cant't upsert the product ${req.params.id}`, error: err})
+    res.send('Product upserted')
+  })
 }
 const remove =(req , res ) => {
-   const product = Product.find(product => product.id == req.params.id);
-   if(product == null){
-       res.send('product dosn`t exist');
-   }
-   else{
-       product.splice(product.id-1,1);
-       res.send(`product: ${req.params.id} remove`);
-   }
+ Product.deleteOne({_id: req.params.id}, (err) => {
+   if (err) res.send({msg:`Cant't delete the product ${req.params.id}`, error: err})
+   res.send('product deleted')
+ })
 }
 
 module.exports =  {
@@ -63,6 +43,5 @@ module.exports =  {
    getById,
    insert,
    upsert,
-   update,
    remove
 }
