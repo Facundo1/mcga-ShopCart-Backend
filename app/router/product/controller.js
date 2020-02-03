@@ -15,7 +15,6 @@ const getById = (req , res ) => {
 }
 const insert = (req, res) => {
   const product = new Product({
-    _id: req.body.id,
     name: req.body.name,
     description: req.body.description,
     price: req.body.price
@@ -26,13 +25,13 @@ const insert = (req, res) => {
   })
 }
 const upsert = (req , res ) => {
-  Product.updateOne({_id: req.params.id}, {...req.body}, (err) => {
+  Product.updateOne({name: req.params.name}, {...req.body}, (err) => {
     if (err) res.send({msg: `Cant't upsert the product ${req.params.id}`, error: err})
     res.send('Product upserted')
   })
 }
 const remove =(req , res ) => {
- Product.deleteOne({_id: req.params.id}, (err) => {
+ Product.deleteOne({name: req.params.name}, (err) => {
    if (err) res.send({msg:`Cant't delete the product ${req.params.id}`, error: err})
    res.send('product deleted')
  })

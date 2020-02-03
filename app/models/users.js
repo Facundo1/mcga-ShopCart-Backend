@@ -2,9 +2,6 @@ const mongoose = require ('mongoose')
 const Schema = mongoose.Schema
 
 const UserSchema = new Schema ({
-    _id: {
-        type: Number
-    },
     name: {
         type: String
     },
@@ -14,7 +11,7 @@ const UserSchema = new Schema ({
     password: {
         type: String
     },
-    date: {
+    address: {
         type: String
     },
     isAdmin: {
