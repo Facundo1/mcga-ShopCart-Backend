@@ -11,7 +11,8 @@ const getAll = (req, res) => {
 }
 
 const getById = (req,res) => {
-    User.findById(req.params.id, (err,users) => {
+    User.findById({_id: req.params.id}, (err,users) => {
+      console.log(err,users)
         if(err) res.send({msg: `Cant't get the user ${req.params.id}`, error: err})
         res.send(users)
     })
@@ -33,9 +34,11 @@ const insert = (req, res) => {
 
   const signUp = (req, res) => {
     const user = new User({
+      _id : req.body.id,
       name: req.body.name,
       email: req.body.email,
-      password:  sha256(req.body.password)
+      password:  sha256(req.body.password),
+      date: '02/02/2020'
     })
     user.save((err) => {
       if (err) res.status(500).send({msg: `Can't save the user: ${err}`})
