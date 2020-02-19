@@ -15,9 +15,12 @@ const getById = (req , res ) => {
 }
 const insert = (req, res) => {
   const product = new Product({
-    name: req.body.name,
+    _id: req.body.id,
+    title: req.body.title,
     description: req.body.description,
-    price: req.body.price
+    availableSizes: req.body.availableSizes,
+    price: req.body.price,
+    isFreeShipping: req.body.isFreeShipping
   })
    product.save((err) => {
     if (err) res.send({msg: 'Cant`t save the product', error: err})
