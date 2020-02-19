@@ -5,15 +5,22 @@ const ProductSchema = new Schema({
     _id: {
         type: Number
     },
-    name: {
+    title: {
         type: String
     },
     description: {
         type: String
     },
+    availableSizes: {
+        type: String
+    },
     price: {
         type: Number
+    },
+    isFreeShipping: {
+        type:Boolean
     }
+
 },{versionKey: false})
 
 const Product = mongoose.model('products',ProductSchema)
