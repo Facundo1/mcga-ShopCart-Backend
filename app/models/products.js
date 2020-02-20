@@ -16,10 +16,8 @@ const ProductSchema = new Schema({
     },
     price: {
         type: Number
-    },
-    isFreeShipping: {
-        type: Boolean
     }
+ 
 },{versionKey: false})
 
 const Product = mongoose.model('products',ProductSchema)
