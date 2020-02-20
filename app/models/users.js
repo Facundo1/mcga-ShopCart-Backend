@@ -13,11 +13,7 @@ const UserSchema = new Schema ({
     },
     address: {
         type: String
-    },
-    isAdmin: {
-        type: Boolean,
-        default: 0
-    }
+    }   
 }, {versionKey: false})
 
 const User = mongoose.model('users',UserSchema)
