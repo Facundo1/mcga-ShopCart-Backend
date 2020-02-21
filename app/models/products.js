@@ -5,10 +5,10 @@ const ProductSchema = new Schema({
     _id: {
         type: Number
     },
-    title: {
+    photo: {
         type: String
     },
-    photo: {
+    title: {
         type: String
     },
     description: {
