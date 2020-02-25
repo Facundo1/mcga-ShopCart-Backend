@@ -25,7 +25,7 @@ const insert = (req, res) => {
   })
    product.save((err) => {
     if (err) res.send({msg: 'Cant`t save the product', error: err})
-    res.send('product saved')
+    res.send({msg:'product saved',data: product})
   })
 }
 const upsert = (req , res ) => {
@@ -35,9 +35,10 @@ const upsert = (req , res ) => {
   })
 }
 const remove =(req , res ) => {
+  const name = req.params.name
  Product.deleteOne({name: req.params.name}, (err) => {
    if (err) res.send({msg:`Cant't delete the product ${req.params.id}`, error: err})
-   res.send('product deleted')
+   res.send({msg:'product deleted',data: name})
  })
 }
 
