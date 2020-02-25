@@ -16,6 +16,7 @@ const getById = (req , res ) => {
 const insert = (req, res) => {
   const product = new Product({
     _id: req.body.id,
+    photo: req.body.photo,
     title: req.body.title,
     description: req.body.description,
     availableSizes: req.body.availableSizes,
