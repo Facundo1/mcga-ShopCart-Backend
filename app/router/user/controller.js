@@ -27,7 +27,7 @@ const insert = (req, res) => {
     })
     user.save((err) => {
       if (err) res.send({msg: 'Cant`t save the user', error: err})
-      res.send(user)
+      res.status(200).json({token: functions.createToken(user)})
     })
   }
 
