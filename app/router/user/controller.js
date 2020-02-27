@@ -10,15 +10,6 @@ const getAll = (req, res) => {
   });
 };
 
-const getById = (req, res) => {
-  User.findById({ _id: req.params.id }, (err, users) => {
-    console.log(err, users);
-    if (err)
-      res.send({ msg: `Cant't get the user ${req.params.id}`, error: err });
-    res.send(users);
-  });
-};
-
 const insert = (req, res) => {
   const user = new User({
     name: req.body.name,
@@ -47,25 +38,21 @@ const signUp = (req, res) => {
 
 const signIn = (req, res) => {
   const { name, password } = req.body;
-  User.findOne(
-    { name, password: sha256(password) },
-    { password: 0 },
-    (err, user) => {
-      if (err) return res.status(500).send({ msg: 'Server Error', error: err });
-      if (!user)
-        return res
-          .status(404)
-          .send({ msg: 'Invalid Email or password', error: err });
-      req.user = user;
-      res
-        .status(200)
-        .json({
-          messagge: 'you are logged',
-          token: functions.createToken(user),
-          user: user.id
-        });
-    }
-  );
+  console.log(req.body);
+  User.findOne({ name }, { password: 0 }, (err, user) => {
+    console.log(user);
+    if (err) return res.status(500).send({ msg: 'Server Error', error: err });
+    if (!user)
+      return res
+        .status(404)
+        .send({ msg: 'Invalid Email or password', error: err });
+    req.user = user;
+    res.status(200).json({
+      messagge: 'you are logged',
+      token: functions.createToken(user),
+      user: user.id
+    });
+  });
 };
 
 const upsert = (req, res) => {
@@ -86,7 +73,6 @@ const remove = (req, res) => {
 
 module.exports = {
   getAll,
-  getById,
   insert,
   upsert,
   remove,
