@@ -19,7 +19,7 @@ const insert = (req, res) => {
     photo: req.body.photo,
     title: req.body.title,
     description: req.body.description,
-    availableSizes: req.body.availableSizes,
+    availableSize: req.body.availableSize,
     price: req.body.price,
   
   })
