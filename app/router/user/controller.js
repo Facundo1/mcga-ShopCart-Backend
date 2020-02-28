@@ -39,20 +39,24 @@ const signUp = (req, res) => {
 const signIn = (req, res) => {
   const { name, password } = req.body;
   console.log(req.body);
-  User.findOne({ name }, { password: 0 }, (err, user) => {
-    console.log(user);
-    if (err) return res.status(500).send({ msg: 'Server Error', error: err });
-    if (!user)
-      return res
-        .status(404)
-        .send({ msg: 'Invalid Email or password', error: err });
-    req.user = user;
-    res.status(200).json({
-      messagge: 'you are logged',
-      token: functions.createToken(user),
-      user: user.id
-    });
-  });
+  User.findOne(
+    { name, password: sha256(password) },
+    { password: 0 },
+    (err, user) => {
+      console.log(user);
+      if (err) return res.status(500).send({ msg: 'Server Error', error: err });
+      if (!user)
+        return res
+          .status(404)
+          .send({ msg: 'Invalid Email or password', error: err });
+      req.user = user;
+      res.status(200).send({
+        messagge: 'you are logged',
+        token: functions.createToken(user),
+        user: user.id
+      });
+    }
+  );
 };
 
 const upsert = (req, res) => {
