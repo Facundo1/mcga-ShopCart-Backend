@@ -38,14 +38,9 @@ const upsert = (req, res) => {
   });
 };
 const remove = (req, res) => {
-  const name = req.params.name;
-  Product.deleteOne({ id: req.params.name }, err => {
-    if (err)
-      res.send({
-        msg: `Cant't delete the product ${req.params.id}`,
-        error: err
-      });
-    res.send({ msg: 'product deleted', data: name });
+  Product.findOneAndDelete({ _id: req.params.id }, (err, doc) => {
+    if (err) return res.status(500).send(err);
+    res.status(200).send(doc);
   });
 };
 
