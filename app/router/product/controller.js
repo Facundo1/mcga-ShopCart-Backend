@@ -28,12 +28,15 @@ const insert = (req, res) => {
   })
 }
 const upsert = (req, res) => {
+
   Product.updateOne({ _id: req.params.id }, { ...req.body }, err => {
+
     if (err)
       res.send({
         msg: `Cant't upsert the product ${req.params.id}`,
         error: err
       })
+
     res.send({ msg: 'Product upserted' })
   })
 }
