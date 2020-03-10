@@ -13,7 +13,7 @@ function createToken(user) {
   return jwtSimple.encode(payload, config.token_key)
 }
 
-// MIDDLEWARE
+// THIS IS A MIDDLEWARE
 function decodeToken(req, res, next) {
   try {
     console.log('HEADERS', req.headers)
