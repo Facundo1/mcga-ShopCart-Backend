@@ -6,6 +6,7 @@ const getAll = (req, res) => {
     res.send(products)
   })
 }
+
 const getById = (req, res) => {
   Product.findById(req.params.id, (err, products) => {
     if (err)
@@ -13,6 +14,7 @@ const getById = (req, res) => {
     res.send(products)
   })
 }
+
 const insert = (req, res) => {
   const product = new Product({
     _id: req.body.id,
@@ -27,16 +29,14 @@ const insert = (req, res) => {
     res.send({ msg: 'product saved', data: product })
   })
 }
+
 const upsert = (req, res) => {
-
   Product.updateOne({ _id: req.params.id }, { ...req.body }, err => {
-
     if (err)
       res.send({
         msg: `Cant't upsert the product ${req.params.id}`,
         error: err
       })
-
     res.send({ msg: 'Product upserted' })
   })
 }
